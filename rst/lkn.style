@@ -1,0 +1,52 @@
+#
+# Local rst2pdf stylesheet to try to get things looking the way I'd like.
+#
+styles: 
+	base: 
+		fontSize: 10
+	bodytext:
+		alignment: TA_LEFT
+	code:
+		backColor: null
+		borderColor: null
+		borderWidth: 0.0
+		borderPadding: 0
+		spaceBefore: 12
+		leftIndent: 6
+		fontSize: 80%
+	heading1:
+		backColor: null
+		borderColor: null
+	heading2:
+		backColor: null
+		borderColor: null
+	heading3:
+		backColor: null
+		borderColor: null
+		fontName: stdBold
+	heading4:
+		backColor: null
+		borderColor: null
+		fontName: stdBold
+	table:
+		spaceBefore: 2
+		spaceAfter: 2
+		commands: []
+			[ROWBACKGROUNDS, [0, 0], [-1, -1], [white,#EEEEEE]]
+#
+# Aim toward an amazon book size; this needs tweaking still.
+#
+pageSetup:
+	size: null
+	width: 6in
+	height: 9in
+	margin-top: 2cm
+	margin-bottom: 2cm
+	margin-left: 2cm
+	margin-right: 15mm
+	spacing-header: 5mm
+	spacing-footer: 5mm
+	margin-gutter: 1cm
+#
+# TODO: check out wordaxe for hyphenation
+#

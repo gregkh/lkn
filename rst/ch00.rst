@@ -1,0 +1,285 @@
+=======
+Preface
+=======
+
+When the topic of this book was first presented to me, I dismissed it as
+something that was already covered by the plentiful documentation about the
+Linux kernel.  Surely someone had already written down all of the basics
+needed in order to build, install, and customize the Linux kernel, as it
+seemed to be a very simple task to me.
+
+<footnote>
+Disclaimer: I'm a Linux kernel developer by trade, so things that seem
+basic and simple to me at times are completely incomprehensible by most
+people, as my family continues to remind me at times.
+</footnote>
+
+After digging through the different HOWTOs and the Linux kernel
+<filename>Documentation</filename> directory, I came to the conclusion that
+there was not any one place where all of this information could be found.
+It could be gleaned by referencing a few files here, and a few outdated
+websites there, but this was not acceptable for anyone who did not know
+exactly what they were looking in the first place.
+
+So this book was created with the goal of consolidating all of the existing
+information already scattered around the Internet about building the Linux
+kernel, as well as adding a lot of new and useful information that was not written
+down anywhere but had been learned by trial and error over my years of
+doing kernel development.
+
+My secret goal of this book is to bring more people into the Linux kernel
+development fold.  The act of building a customized kernel for your machine
+is one of the basic tasks needed to become a Linux kernel developer.  The
+more people that try this out, and realize that there is not any real magic
+behind the whole Linux kernel process, the more people will be willing to
+jump in and help out in making the kernel the best that it can be.
+
+Audience for the book
+=====================
+
+<!--
+	gkh: This section seems a bit light, is more needed here?
+        AO: This is fine, it's actually comprehensive.
+-->
+
+This book is intended to cover everything that is needed to know in order
+to properly build, customize, and install the Linux kernel.  No programming
+experience is needed to understand and use this book.
+
+Some familiarity with how to use Linux, and some basic command-line usage
+is expected of the reader.
+
+This book is not intended to go into the programming aspects of the Linux
+kernel; there are many other good books listed in the Bibliography that
+already cover this topic.
+
+
+Organization of the material
+============================
+
+There are three major parts to this book.  The first part is composed of
+Chapters 1 through 6, which cover everything you need to know about
+retrieving, building, installing, and upgrading the Linux kernel, in
+more or less step-by-step fashion.
+
+The second part consists of Chapters 7 and 8, which describe how to properly
+configure the kernel based on the hardware present in the system, and
+provides a number of different "recipes" for common configurations.
+
+The final part consists of Chapters 9 through 11.  These chapters provide
+a reference to the different kernel command line options, the kernel build
+options, and a select few of the different kernel configuration options.
+
+Chapter 1, <literal>Introduction</literal>, explains when and why
+you would want to build the kernel.
+
+Chapter 2, <literal>Requirements For Building and Using the
+Kernel</literal>, covers the different programs and tools that are needed
+in order to properly build the kernel.  It also covers a number of
+different programs that are tied very closely to the kernel, how to
+determine the needed version of the programs, and where to find them.
+
+Chapter 3, <literal>Retrieving the kernel source</literal> discusses how
+the different Linux kernel versions relate to each other, where to retrieve
+the Linux kernel source code from, and how to download it properly.
+
+Chapter 4, <literal>Configuring and Building</literal> explains how to
+configure and properly build the Linux kernel.
+
+Chapter 5, <literal>Installing and Booting from a Kernel</literal> shows
+how to install the kernel that has been built properly, and then boot into
+that kernel version.
+
+Chapter 6, <literal>Upgrading a Kernel</literal> explains how to upgrade a
+kernel that was previously built to a newer version without having to start
+over from nothing.
+
+Chapter 7, <literal>Customizing a Kernel</literal> discusses how to
+customize the kernel for the hardware that is present on the system.  It
+goes over a variety of different ways to determine what options should be
+selected and provides some simple scripts to help with the task.
+
+Chapter 8, <literal>Kernel Configuration Recipes</literal> explains how to
+configure the kernel for a variety of common situations.
+
+Chapter 9, <literal>Kernel boot command-line parameter reference</literal>
+details all of the different command-line options that can be passed to the
+kernel, and what the different options do.
+
+Chapter 10, <literal>Kernel build command line reference</literal>
+describes the different command line options that are available when
+building the kernel and how to use them.
+</para>
+
+<para>
+Chapter 11, <literal>Kernel Configuration Option Reference</literal>
+focuses on a few of the more popular and important Linux kernel
+configuration options.
+</para>
+
+Appendix A, <literal>Helpful Utilities</literal> introduces a number of
+very good and handy tools that everyone who wishes to track the latest
+Linux kernel version should use.
+
+
+Online Version and License
+==========================
+
+This book is freely available under the Creative Commons
+"Attribution-ShareAlike" license, Version 2.5.  This license can be seen in
+its entirety in <xref linkend="license" />.  The full book is also
+available online at
+<systemitem role="url">http://www.kroah.com/lkn</systemitem>.
+
+
+Conventions Used in This Book
+=============================
+
+This book uses the following typographical conventions:
+
+<variablelist>
+<varlistentry>
+<term><firstterm>Italic</firstterm></term>
+<listitem>
+<para>
+<!--
+
+  AO: The following reflects what will happen (I hope) when the
+  filename, command, and option tags are formatted correctly.
+
+  gkh: gotta trust the tools people...
+
+-->
+Indicates commands and command options, files, directories, usernames, and
+hostnames. Also indicates nomenclature that we've not previously used,
+emphasized words, and new terms.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><literal>Constant Width</literal></term>
+<listitem>
+<para>
+Indicates strings used for kernel configuration, as well as a few
+special terms such as device names and distribution packages. Also
+used to show the command output, and the contents of text
+and program files.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><userinput>Constant Width Bold</userinput></term>
+<listitem>
+<para>
+Used in examples to indicate commands or other text that should be typed
+literally by the user.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><replaceable>Constant Width Italic</replaceable></term>
+<listitem>
+<para>
+Indicates text that you should replace with your own values;  for example,
+your own name or password.  When this appears as part of text that you
+should type in, it is shown as
+<userinput><replaceable>Constant Width Italic Bold</replaceable></userinput>.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><prompt>#</prompt>, <prompt>$</prompt></term>
+<listitem>
+<para>
+Used in some examples as the root shell prompt
+(<literal>#</literal>) and as the user prompt
+(<literal>$</literal>) under the Bourne or
+<literal>bash</literal> shell.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term></term>
+<listitem>
+<para>
+<warning role="ora">
+<para>Indicates a warning or caution.</para>
+</warning>
+</para>
+</listitem>
+</varlistentry>
+
+<!--
+<note role="ora">
+<para>Signifies a tip, suggestion, or general note.</para>
+</note>
+-->
+
+</variablelist>
+</para>
+</sect1>
+
+<sect1>
+<title>Contact Information</title>
+
+<para>
+Standard O'Reilly contact information goes here...
+</para>
+
+</sect1>
+
+
+Acknowledgments
+===============
+
+Thanks first go to my wonderful wife Shannon and my beautiful children
+Madeline and Griffin for their understanding and patience while I took the
+time to work on this book.  Without their support and prodding, this book
+would have never been completed.  Special thanks to Shannon for getting me
+into Linux kernel development in the first place.  Without her effort, I
+would be still doing some odd embedded programming job, and would have
+never discovered this great community in which to work in.
+
+My editor, Andy Oram, is the driving force behing this book, shaping it
+into something that is both readable and informative.  His editing skills
+and patience as deadlines flew by were instrumental in the creation and
+completion of this book.
+
+Also a big thanks go to the original editor of this book, David Brickner,
+for giving me the chance to work on this project and believing that I could
+complete it, despite the first version weighing in at over 1000 pages.
+
+The technical reviewers for this book were amazing, catching all of the
+numerous mistakes and pointing out ommisions that needed to be filled.  The
+reviewers were (in alphabetic order by first name),
+Christian Benvenuti,
+Christian Morgner,
+Golden G. Richard III,
+Jean Delvare,
+Jerry Cooperstein,
+Michael Boerner,
+Rik van Riel, and
+Robert Day.
+<!-- did I forget anyone?
+     AO: I just added Rik.
+     gkh: and I added Jean, so that should be it.  -->
+Any remaining problems are due to me, and not their excellent skills.
+
+A special thanks to Randy Dunlap for going over the kernel boot parameters
+with a fine tooth comb and pointing out issues in that chapter.  Also to
+Kay Sievers, who helped immensely with all of the chapter on customizing
+the kernel, and who provided the script at the end of that same chapter.
+Without his <literal>sysfs</literal> help and knowledge, that chapter would
+not have been feasible.
+
+And a final special thanks to my 6th grade English teacher, Ms. Gruber, for
+teaching me that writing was something that was possible to do, and showing
+me the enjoyment in doing it.  Without that start, none of this would have
+been attainable.
+
+
